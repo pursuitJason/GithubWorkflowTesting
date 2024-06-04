@@ -27,42 +27,62 @@ def register():
 
 @app.route('/Login', methods=['POST'])
 def Authenticate():
-    if stub == 1:
-        stubJson = load_json_file("Stub\\authenticateStub.json")
-        return jsonify(stubJson)
-    else:
-        input_json = request.get_json()
-        identity = IdentityManager.Authenticate(input_json)
-        return jsonify(identity)
+    try:
+        if stub == 1:
+            stubJson = load_json_file("Stub\\authenticateStub.json")
+            return jsonify(stubJson)
+        else:
+            input_json = request.get_json()
+            identity = IdentityManager.Authenticate(input_json)
+            return jsonify(identity)
+    except Exception as e:
+        logger.log("ERROR",f'Error in authenticate Function: {e}')
+        return  str(e)
     
 
 @app.route('/Logout', methods=['POST'])
 def logout():
-    if stub == 1:
-        stubJson = load_json_file("Stub\logoutStub.json")
-        return jsonify(stubJson)
-    else:
-        input_json = request.get_json()
-        identity = IdentityManager.logout(input_json)
-        return jsonify(identity)
+    try:
+        if stub == 1:
+            stubJson = load_json_file("Stub\logoutStub.json")
+            return jsonify(stubJson)
+        else:
+            input_json = request.get_json()
+            identity = IdentityManager.logout(input_json)
+            return jsonify(identity)
+    except Exception as e:
+        logger.log("ERROR",f'Error in logout Function: {e}')
+        return  str(e)
     
 
 @app.route('/activateUser', methods=['POST'])
 def activateUser():
-    if stub == 1:
-        stubJson = load_json_file("Stub\logoutStub.json")
-        return jsonify(stubJson)
-    else:
-        input_json = request.get_json()
-        authkey = input_json.get("authkey","")
-        identity = IdentityManager.ActivateUser(authkey)
-        return jsonify(identity)
+    try:
+        if stub == 1:
+            stubJson = load_json_file("Stub\logoutStub.json")
+            return jsonify(stubJson)
+        else:
+            input_json = request.get_json()
+            authkey = input_json.get("authkey","")
+            identity = IdentityManager.ActivateUser(authkey)
+            return jsonify(identity)
+    except Exception as e:
+        logger.log("ERROR",f'Error in activate user Function: {e}')
+        return  str(e)
 
+
+@app.route('/display', methods=['GET'])
+def display():
+    """ Display Function"""
+    try:
+        return ("")
+    except Exception as e:
+        return (str(e))
 
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5002, debug=True)
 
 
 
