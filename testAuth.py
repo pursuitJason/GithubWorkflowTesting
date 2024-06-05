@@ -75,8 +75,9 @@ def activateUser():
 def display():
     """ Display Function"""
     try:
-        return ("")
+        return ("NLP-API Version 5.0")
     except Exception as e:
+        logger.log("ERROR",f'Error in display Function: {e}')
         return (str(e))
 
 
